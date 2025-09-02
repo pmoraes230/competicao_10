@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --cinca: #F2F2F2;
     --azul: #1331A1;
     --Rosa: #F31366;
     --amarelo: #F8B62F;
     --verde: #A2CA02;
+    --Cinza: #F2F2F2;
     --Preto: #0C0C0C;
 }
 
 body {
     font-family: "Roboto Condensed", sans-serif;
-    background-color: var(--cinca);
+    background-color: var(--Cinza);
     display: flex;
     flex-direction: column;
     max-height: 100vh;
@@ -19,4 +19,34 @@ body {
 
 main {
     flex-grow: 1;
+}
+
+.color_azul {
+    color: var(--azul);
+}
+
+.color_preto {
+    color: var(--Preto);
+}
+
+.space_header {
+    margin-left: 65rem;
+}
+
+.btn_verde {
+    background-color: var(--verde);
+    padding: 10px 8px;
+    border-radius: 20px;
+}
+
+.btn_verde:hover {
+    background-color: transparent;
+    border: 2px solid var(--verde);
+    box-shadow: 0 4px 4px 0 var(--verde);
+}
+
+.btn_rosa {
+    background-color: var(--verde);
+    padding: 10px 8px;
+    border-radius: 20px;
 }
