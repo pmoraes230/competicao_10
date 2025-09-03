@@ -8,39 +8,47 @@
 
 <main class="container">
     {% if messages %}
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="messageModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5 color_azul" id="messageModalLabel">Aviso</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <ul class="list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item {{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
+                    <button type="button" class="btn btn_amarelo color_preto" data-bs-dismiss="modal">Fechar</button>
                 </div>
             </div>
         </div>
     </div>
     {% endif %}
 
-    <h1 class="h1 text-center">Usuários</h1>
+    <h1 class="h1 text-center color_azul">Usuários</h1>
+    <div class="d-flex align-items-center flex-column gap-3 mb-4">
+        <input type="text" id="textInput" class="form-control color_azul" placeholder="Insira o nome do usuário">
+        <a href="{% url 'register_user' %}" class="btn btn_verde color_preto">Cadastrar novo usuário <i class="bi bi-plus-circle-fill"></i></a>
+    </div>
 
     <div class="row">
         {% for user in users %}
-        <div class="col-sm-4 mb-3 mb-sm-0">
+        <div class="col-sm-4 mb-3 mb-sm-0 cards" data-name="{{ user. }}">
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title color_azul">Nome usuário <span class="color_preto">{{ user.nome_usuario }}</span></h5>
                     <p class="card-text">Email: <span class="color_preto">{{ user.email_usuario }}</span></p>
                     <p class="card-text">CPF: <span class="color_preto">{{ user.cpf_usuario }}</span></p>
                     <p class="card-text">Perfil: <span class="color_preto">{{ user.perfil.nome_perfil }}</span></p>
-                    <div class="d-flex">
-                        <a href="#" class="btn btn_verde">Editar</a>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{% url 'update_user' user.id_usuario %}" class="btn btn_verde color_preto">Editar <i class="bi bi-plus-circle-fill"></i></a>
+                        <a href="{% url 'delete_user' user.id_usuario %}" class="btn btn_rosa color_preto">Editar <i class="bi bi-trash"></i></a>
                     </div>
                 </div>
             </div>
@@ -49,4 +57,7 @@
     </div>
 </main>
 
+{% endblock %}
+{% block footer %}
+{% include "partials/footer/footer.html" %}
 {% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% block header %}
+{% include "partials/header/header.html" %}
+{% endblock %}
+
+<main class="container">
+    {% if messages %}
+    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 color_azul" id="messageModalLabel">Aviso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item {{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_amarelo color_preto" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <h1 class="h1 text-center color_azul">Cadastro de usuário</h1>
+    <form action="{% url 'register_user' %}" method="post">
+        {% csrf_token %}
+        <h5 class="h5 color_azul">Dados pessoais</h5>
+        <div class="mb-3">
+            <label for="nome" class="form-label color_azul">Nome completo:</label>
+            <input type="text" name="nome" id="nome" class="form-control color_azul" placeholder="Insira seu nome completo">
+        </div>
+        <div class="mb-3">
+            <label for="cpf" class="form-label color_azul">CPF:</label>
+            <input type="text" name="cpf" id="cpf" class="form-control color_azul" maxlength="14" oninput="maskCPF(this)" placeholder="000.000.000-00">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label color_azul">Email:</label>
+            <input type="email" name="email" id="email" class="form-control color_azul" placeholder="Insira seu Email">
+        </div>
+        <h5 class="h5 color_azul">Dados entrada</h5>
+        <div class="mb-3">
+            <label for="perfil_id" class="form-label color_azul">Perfil:</label>
+            <select name="perfil_id" id="perfil_id" class="form-select color_azul">
+                <option value="" disabled selected>Escolha o perfil do usuário</option>
+                {% for perfil in perfis %}
+                <option value="{{ perfil.id_perfil }}">{{ perfil.nome_perfil }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="senha1" class="form-label color_azul">Senha:</label>
+            <div class="camp_senha">
+                <input type="password" name="senha1" id="senha1" class="form-control color_azul" placeholder="Insira a sua senha">
+                <button id="btn_eye" class="btn_eye btn"><img src="{% static 'icons/eye.svg' %}" alt="Eye"></button>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="senha2" class="form-label color_azul">Confirmar senha:</label>
+            <input type="password" name="senha2" id="senha2" class="form-control color_azul" placeholder="Confirme sua senha">
+        </div>
+        <div class="d-flex align-items-center flex-column gap-3">
+            <button type="submit" class="btn btn_verde color_preto w-25">Cadastrar usuário <i class="bi bi-plus-circle-fill"></i></button>
+            <a href="{% url 'list_user' %}" class="btn btn_rosa color_preto">Cancelar cadastro <i class="bi bi-x-square"></i></a>
+        </div>
+    </form>
+</main>
+{% endblock %}
+{% block footer %}
+{% include "partials/footer/footer.html" %}
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'scripts/maskCPF.js' %}"></script>
+{% endblock %}

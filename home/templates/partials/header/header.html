@@ -10,21 +10,28 @@
         <div class="collapse navbar-collapse space_header" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link colorAzulHeader" href="#">Usuários <i class="bi bi-person-fill"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link colorAzulHeader" href="#">Cadastro de eventos <i class="bi bi-soundwave"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link colorAzulHeader" href="#">Dashboard <i class="bi bi-graph-up"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link colorAzulHeader" href="#">Validador <i class="bi bi-key"></i></a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle colorAzulHeader" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Dropdown link
+                        {% if user_name %}
+                        {{ user_name }}
+                        {% else %}
+                        Usuário não autenticado
+                        {% endif %}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item colorAzulHeader" href="#">Sair</a></li>
                     </ul>
                 </li>
             </ul>

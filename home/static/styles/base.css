@@ -14,7 +14,7 @@ body {
     background-color: var(--Cinza);
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
+    min-height: 100vh;
 }
 
 main {
@@ -25,6 +25,14 @@ main {
     color: var(--azul);
 }
 
+.colorAzulHeader {
+    color: var(--azul);
+}
+
+.colorAzulHeader:hover {
+    color: #0b1c5a;
+}
+
 .color_preto {
     color: var(--Preto);
 }
@@ -33,9 +41,13 @@ main {
     margin-left: 65rem;
 }
 
+.line_admin {
+    border-top: 2px solid var(--azul);
+}
+
 .btn_verde {
     background-color: var(--verde);
-    padding: 10px 8px;
+    padding: 4px 8px;
     border-radius: 20px;
 }
 
@@ -46,7 +58,34 @@ main {
 }
 
 .btn_rosa {
-    background-color: var(--verde);
-    padding: 10px 8px;
+    border: 2px solid var(--Rosa);
+    padding: 4px 8px;
     border-radius: 20px;
+}
+
+.btn_rosa:hover {
+    background-color: transparent;
+    border: 2px solid var(--Rosa);
+    box-shadow: 0 4px 4px 0 var(--Rosa);
+}
+
+.btn_amarelo {
+    border: 2px solid var(--amarelo);
+    padding: 4px 8px;
+    border-radius: 20px;
+}
+
+.btn_amarelo:hover {
+    background-color: transparent;
+    border: 2px solid var(--amarelo);
+    box-shadow: 0 4px 4px 0 var(--amarelo);
+}
+
+.camp_senha {
+    display: flex;
+}
+
+.btn_eye {
+    position: absolute;
+    left: 78%;
 }
