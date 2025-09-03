@@ -39,7 +39,7 @@
 
     <div class="row">
         {% for user in users %}
-        <div class="col-sm-4 mb-3 mb-sm-0 cards" data-name="{{ user. }}">
+        <div class="col-sm-4 mb-3 mb-sm-0 cards" data-name="{{ user.nome_usuario }}" data-email="{{ user.email_usuario }}">
             <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title color_azul">Nome usuário <span class="color_preto">{{ user.nome_usuario }}</span></h5>
@@ -60,4 +60,7 @@
 {% endblock %}
 {% block footer %}
 {% include "partials/footer/footer.html" %}
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'scripts/filter_user.js' %}"></script>
 {% endblock %}
