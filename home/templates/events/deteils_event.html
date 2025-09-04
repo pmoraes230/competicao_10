@@ -7,7 +7,13 @@
 
 {% block content %}
 {% block header %}
+{% if user_role == "Validador" %}
+{% include "partials/header/header_validador.html" %}
+{% elif user_role == "Vendedor" %}
+{% include "partials/header/header_vendedor.html" %}
+{% else %}
 {% include "partials/header/header.html" %}
+{% endif %}
 {% endblock %}
 
 <main class="container">
@@ -52,12 +58,14 @@
             <div class="descricao">
                 <p class="color_azul">{{ event.descricao_evento }}</p>
             </div>
+            {% if user_role == "Administrador" %}
             <div class="buttons">
                 <a href="{% url 'ticket_generate' event.id_evento %}" class="btn btn_verde color_preto">Ingressos gerados <i class="bi bi-search"></i></a>
                 <a href="{% url 'update_event' event.id_evento %}" class="btn btn_azul color_preto">Editar evento <i class="bi bi-soundwave"></i></a>
                 <a href="{% url 'lista_setores' event.id_evento %}" class="btn btn_amarelo color_preto">Setores <i class="bi bi-grid-fill"></i></a>
                 <a href="{% url 'delete_event' event.id_evento %}" class="btn btn_rosa color_preto">Apagar evento <i class="bi bi-trash"></i></a>
             </div>
+            {% endif %}
         </div>
     </div>
 
@@ -122,5 +130,11 @@
 
 {% endblock %}
 {% block footer %}
+{% if user_role == "Validador" %}
+{% include "partials/footer/footer_validador.html" %}
+{% elif user_role == "Vendedor" %}
+{% include "partials/footer/footer_Vendedor.html" %}
+{% else %}
 {% include "partials/footer/footer.html" %}
+{% endif %}
 {% endblock %}

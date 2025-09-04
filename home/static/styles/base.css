@@ -45,8 +45,32 @@ main {
     margin-left: 50rem;
 }
 
-.line_admin {
+.space_header_validador_vendedor {
+    margin-left: 85rem;
+}
+
+.line_vendedor {
+    border-bottom: 2px solid var(--Rosa);
+}
+
+.line_validador {
+    border-bottom: 2px solid var(--amarelo);
+}
+
+.line_validador_footer {
+    border-top: 2px solid var(--amarelo);
+}
+
+.line_vendedor_footer {
+    border-top: 2px solid var(--Rosa);
+}
+
+.line_admin_footer {
     border-top: 2px solid var(--azul);
+}
+
+.line_admin {
+    border-bottom: 2px solid var(--azul);
 }
 
 .btn_verde {
@@ -109,4 +133,14 @@ main {
 .header_card {
     background-color: var(--Preto);
     padding: 10px 5px;
+}
+
+@media (max-width: 440px) {
+    .space_header {
+        margin-left: 0;
+    }
+    
+    .space_header_validador_vendedor {
+        margin-left: 0;
+    }
 }

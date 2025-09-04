@@ -37,24 +37,15 @@
     </div>
     {% endif %}
 
-    <h1 class="h1 text-center color_azul">Cadastro de cliente</h1>
-    <form action="{% url 'register_client' event.id_evento %}" method="post">
+    <h1 class="h1 text-center color_azul">Validador</h1>
+    <form action="{% url 'validador' %}" method="post">
         {% csrf_token %}
         <div class="mb-3">
-            <label for="nome_cliente" class="form-label color_azul">Nome: <span class="color_rosa">*</span></label>
-            <input type="text" name="nome_cliente" id="nome_cliente" class="form-control color_azul" placeholder="insira seu nome do cliente">
+            <label for="id_ticket" class="form-label color_azul">Código do ingresso</label>
+            <input type="text" name="id_ticket" id="id_ticket" class="form-control color_azul" placeholder="Insira o código do ingresso">
         </div>
-        <div class="mb-3">
-            <label for="email_cliente" class="form-label color_azul">Email:<span class="color_rosa">*</span></label>
-            <input type="email" name="email_cliente" id="email_cliente" class="form-control color_azul" placeholder="Insira seu email do cliente">
-        </div>
-        <div class="mb-3">
-            <label for="cpf" class="form-label color_azul">CPF:<span class="color_rosa">*</span></label>
-            <input type="text" name="cpf" id="cpf" class="form-control color_azul" maxlength="14" oninput="maskCPF(this)" placeholder="000.000.000-00">
-        </div>
-        <div class="d-flex flex-column align-items-center gap-3">
-            <button type="submit" class="btn btn_verde color_preto">Cadastrar cliente <i class="bi bi-person-fill"></i></button>
-            <a href="{% url 'deteils_event' event.id_evento %}" class="btn btn_rosa color_preto">Cancelar cadastro <i class="bi bi-x-square"></i></a>
+        <div class="text-center">
+            <button type="submit" id="btn" class="btn btn_verde color_preto" disabled>Validar <i class="bi bi-check-circle-fill"></i></button>
         </div>
     </form>
 </main>
@@ -69,6 +60,7 @@
 {% include "partials/footer/footer.html" %}
 {% endif %}
 {% endblock %}
+
 {% block scripts %}
-<script src="{% static 'scripts/maskCPF.js' %}"></script>
+<script src="{% static 'scripts/stateButton.js' %}"></script>
 {% endblock %}

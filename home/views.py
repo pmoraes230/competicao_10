@@ -520,8 +520,10 @@ def update_setor(request, id_setor):
     return render(request, "setores/update_setores.html", context)
     
 def register_client(request, id_event):
-    context = get_user_profile(request)
-    context['event'] = models.Evento.objects.get(id_evento=id_event)
+    context = {
+        "event": models.Evento.objects.get(id_evento=id_event),
+        **get_user_profile(request)
+    }
     
     if request.method == "POST":
         nome_cliente = request.POST.get("nome_cliente")

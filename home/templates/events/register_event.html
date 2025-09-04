@@ -3,7 +3,13 @@
 
 {% block content %}
 {% block header %}
+{% if user_role == "Validador" %}
+{% include "partials/header/header_validador.html" %}
+{% elif user_role == "Vendedor" %}
+{% include "partials/header/header_vendedor.html" %}
+{% else %}
 {% include "partials/header/header.html" %}
+{% endif %}
 {% endblock %}
 
 <main class="container">
@@ -67,5 +73,11 @@
 </main>
 {% endblock %}
 {% block footer %}
+{% if user_role == "Validador" %}
+{% include "partials/footer/footer_validador.html" %}
+{% elif user_role == "Vendedor" %}
+{% include "partials/footer/footer_Vendedor.html" %}
+{% else %}
 {% include "partials/footer/footer.html" %}
+{% endif %}
 {% endblock %}
