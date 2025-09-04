@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% block header %}
+{% include "partials/header/header.html" %}
+{% endblock %}
+
+<main class="container">
+    {% if messages %}
+    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 color_azul" id="messageModalLabel">Aviso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item {{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_amarelo color_preto" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <h1 class="h1 text-center color_azul">Setores</h1>
+    <div class="d-flex align-items-center flex-column gap-3 mb-4">
+        <a href="{% url 'register_setor' evento.id_evento %}" class="btn btn_verde color_preto">Cadastrar novo setor <i class="bi bi-plus-circle-fill"></i></a>
+        <a href="{% url 'deteils_event' evento.id_evento %}" class="btn btn_amarelo color_preto">Voltar ao evento <i class="bi bi-soundwave"></i></a>
+    </div>
+
+    <div class="row">
+        {% for setor in setores %}
+        <div class="col-sm-4 mb-3 mb-sm-0 cards" data-name="{{ setor.nome_setor }}">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title color_azul">Nome setor: <span class="color_preto">{{ setor.nome_setor }}</span></h5>
+                    <p class="card-text color_azul">Limite de público: <span class="color_preto">{{ setor.limite_setor }}</span></p>
+                    <p class="card-text color_azul">Preço: <span class="color_preto">{{ setor.preco_setor  }}</span></p>
+                    <p class="card-text color_azul">Evento: <span class="color_preto">{{ setor.evento_id_evento.nome_evento  }}</span></p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <a href="{% url 'update_setor' setor.id_setor %}" class="btn btn_verde color_preto">Editar <i class="bi bi-plus-circle-fill"></i></a>
+                        <a href="{% url 'delete_setor' setor.id_setor %}" class="btn btn_rosa color_preto">Apagar <i class="bi bi-trash"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</main>
+
+{% endblock %}
+{% block footer %}
+{% include "partials/footer/footer.html" %}
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'scripts/filter_user.js' %}"></script>
+{% endblock %}

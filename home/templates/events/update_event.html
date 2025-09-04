@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% block header %}
+{% include "partials/header/header.html" %}
+{% endblock %}
+
+<main class="container">
+    {% if messages %}
+    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 color_azul" id="messageModalLabel">Aviso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item {{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_amarelo color_preto" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <h1 class="h1 text-center color_azul">Editar evento</h1>
+    <form action="{% url 'update_event' evento.id_evento %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nome" class="form-label color_azul">Nome do evento:</label>
+            <input type="text" name="nome" id="nome" class="form-control color_azul" placeholder="Insira seu nome evento" value="{{ evento.nome_evento }}">
+        </div>
+        <div class="mb-3">
+            <label for="limite_pessoas" class="form-label color_azul">Limite de pessoas:</label>
+            <input type="number" name="limite_pessoas" id="limite_pessoas" class="form-control color_azul" placeholder="limite de pessoas no evento" value="{{ evento.limitepessoas_evento }}">
+        </div>
+        <div class="mb-3">
+            <label for="data_evento" class="form-label color_azul">Data do evento:</label>
+            <input type="date" name="data_evento" id="data_evento" class="form-control color_azul" value="{{ evento.data_evento|date:"Y-m-d" }}">
+        </div>
+        <div class="mb-3">
+            <label for="horario_evento" class="form-label color_azul">Horário do evento:</label>
+            <input type="time" name="horario_evento" id="horario_evento" class="form-control color_azul" value="{{ evento.horario_evento|time:"H:i" }}">
+        </div>
+        <div class="mb-3">
+            <label for="imagem_evento" class="form-label color_azul">Horário do evento:</label>
+            <input type="file" accept="png/jpg" name="imagem_evento" id="imagem_evento" class="form-control color_azul">
+            <p class="color_azul">Imagem: <img src="{{ evento.imagem_evento.url }}" alt="{{ evento.nome_evento }}" style="width: 20rem;"></p>
+        </div>
+        <div class="mb-3">
+            <label for="descricao_evento" class="form-label color_azul">Descrição:</label>
+            <textarea name="descricao_evento" id="descricao_evento" class="form-control color_azul" rows="5" style="resize: none;" placeholder="Insira a descrição do evento">{{ evento.descricao_evento }}</textarea>
+        </div>
+        
+        <div class="d-flex align-items-center flex-column gap-3">
+            <button type="submit" class="btn btn_verde color_preto w-25">Editar evento <i class="bi bi-soundwave"></i></button>
+            <a href="{% url 'deteils_event' evento.id_evento %}" class="btn btn_rosa color_preto w-25">Cancelar edição <i class="bi bi-x-square"></i></a>
+        </div>
+    </form>
+</main>
+{% endblock %}
+{% block footer %}
+{% include "partials/footer/footer.html" %}
+{% endblock %}

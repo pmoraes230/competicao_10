@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="{% static 'icons/Logo.svg' %}" style="width: 25%;" alt=""></a>
+        <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'icons/Logo.svg' %}" style="width: 25%;" alt=""></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -10,10 +10,10 @@
         <div class="collapse navbar-collapse space_header" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link colorAzulHeader" href="#">Usuários <i class="bi bi-person-fill"></i></a>
+                    <a class="nav-link colorAzulHeader" href="{% url 'list_user' %}">Usuários <i class="bi bi-person-fill"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link colorAzulHeader" href="#">Cadastro de eventos <i class="bi bi-soundwave"></i></a>
+                    <a class="nav-link colorAzulHeader" href="{% url 'register_event' %}">Cadastro de eventos <i class="bi bi-soundwave"></i></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link colorAzulHeader" href="#">Dashboard <i class="bi bi-graph-up"></i></a>
@@ -31,7 +31,7 @@
                         {% endif %}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item colorAzulHeader" href="#">Sair</a></li>
+                        <li><a class="dropdown-item colorAzulHeader" href="{% url 'logout' %}">Sair</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,0 +1,25 @@
+.container_image {
+    position: absolute;
+    right: 0;
+}
+
+.img_login {
+    height: 100vh;
+    width: 100vh;
+}
+
+.inf_login {
+    margin: 7rem 0 0 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.w-20 {
+    width: 20rem;
+}
+
+.btn_eye{
+    position: absolute;
+    left: 31%;
+}

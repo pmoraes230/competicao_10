@@ -46,9 +46,10 @@
                     <p class="card-text">Email: <span class="color_preto">{{ user.email_usuario }}</span></p>
                     <p class="card-text">CPF: <span class="color_preto">{{ user.cpf_usuario }}</span></p>
                     <p class="card-text">Perfil: <span class="color_preto">{{ user.perfil.nome_perfil }}</span></p>
+                    <p class="card-text">Senha: <span class="color_preto">{{ user.senha_usuario }}</span></p>
                     <div class="d-flex justify-content-between align-items-center">
                         <a href="{% url 'update_user' user.id_usuario %}" class="btn btn_verde color_preto">Editar <i class="bi bi-plus-circle-fill"></i></a>
-                        <a href="{% url 'delete_user' user.id_usuario %}" class="btn btn_rosa color_preto">Editar <i class="bi bi-trash"></i></a>
+                        <a href="{% url 'delete_user' user.id_usuario %}" class="btn btn_rosa color_preto">Apagar <i class="bi bi-trash"></i></a>
                     </div>
                 </div>
             </div>

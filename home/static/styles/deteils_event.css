@@ -1,0 +1,21 @@
+.img_evento {
+    max-width: 488px;
+    width: 100%;
+}
+
+.bg_amarelo {
+    background-color: var(--amarelo);
+    font-size: 20px;
+    padding: 10px 5px;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.descricao {
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+.w-12 {
+    width: 12%;
+}

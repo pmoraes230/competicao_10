@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% block header %}
+{% include "partials/header/header.html" %}
+{% endblock %}
+
+<main class="container">
+    {% if messages %}
+    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 color_azul" id="messageModalLabel">Aviso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item {{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_amarelo color_preto" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <h1 class="h1 text-center color_azul">Cadastro de setor</h1>
+    <form action="{% url 'update_setor' setor.id_setor %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nome" class="form-label color_azul">Nome do setor:</label>
+            <input type="text" name="nome" id="nome" class="form-control color_azul" placeholder="insira seu nome do setor" value="{{ setor.nome_setor }}">
+        </div>
+        <div class="mb-3">
+            <label for="qtd_ingresso" class="form-label color_azul">Limite do setor:</label>
+            <input type="number" name="qtd_ingresso" id="qtd_ingresso" class="form-control color_azul" placeholder="Insira a quantidade de ingressos do setor" value="{{ setor.limite_setor }}">
+        </div>
+        <div class="mb-3">
+            <label for="preco_setor" class="form-label color_azul">Preço do setor:</label>
+            <input type="number" name="preco_setor" id="preco_setor" class="form-control color_azul" placeholder="insira o preço do setor" value="{{ setor.preco_setor|floatformat }}">
+        </div>
+        <div class="mb-3">
+            <label for="evento_id" class="form-label color_azul">Escolha um evento:</label>
+            <select name="evento_id" id="evento_id" class="form-select color_azul">
+                <option value="" disabled selected>Escolha o evento deste setor</option>
+                {% for evento in eventos %}
+                {% if evento.id_evento == setor.evento_id_evento.id_evento %}
+                <option value="{{ evento.id_evento }}" selected>{{ evento.nome_evento }}</option>
+                {% else %}
+                <option value="{{ evento.id_evento }}">{{ evento.nome_evento }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div class="d-flex align-items-center flex-column gap-3">
+            <button type="submit" class="btn btn_verde color_preto w-25">Cadastrar novo setor <i class="bi bi-soundwave"></i></button>
+            <a href="{% url 'list_user' %}" class="btn btn_rosa color_preto w-25">Cancelar cadastro <i class="bi bi-x-square"></i></a>
+        </div>
+    </form>
+</main>
+{% endblock %}
+{% block footer %}
+{% include "partials/footer/footer.html" %}
+{% endblock %}

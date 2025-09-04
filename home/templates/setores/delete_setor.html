@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+{% block header %}
+{% include "partials/header/header.html" %}
+{% endblock %}
+
+<main class="container">
+    {% if messages %}
+    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 color_azul" id="messageModalLabel">Aviso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item {{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_amarelo color_preto" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <h1 class="h1 color_azul text-center">Apagar setor</h1>
+    <h4 class="h4 color_azul text-center">Tem certeza que deseja apagar o setor: <span class="color_preto">{{ setor.nome_setor }}</span>?</h4>
+    <form action="{% url 'delete_setor' setor.id_setor %}" method="post">
+        {% csrf_token %}
+        <div class="text-center">
+            <button type="submit" class="btn btn_rosa color_preto">Apagar <i class="bi bi-trash"></i></button>
+            <a href="{% url 'lista_setores' setor.evento_id_evento.id_evento %}" class="btn btn_verde color_preto">Voltar a página dos setores <i class="bi bi-soundwave"></i></a>
+        </div>
+    </form>
+</main>
+{% endblock %}
+{% block footer %}
+{% include "partials/footer/footer.html" %}
+{% endblock %}

@@ -61,7 +61,7 @@
             <label for="senha1" class="form-label color_azul">Senha:</label>
             <div class="camp_senha">
                 <input type="password" name="senha1" id="senha1" class="form-control color_azul" placeholder="Insira a sua senha">
-                <button id="btn_eye" class="btn_eye btn"><img src="{% static 'icons/eye.svg' %}" alt="Eye"></button>
+                <button type="button" id="btn_eye" class="btn_eye btn"><img src="{% static 'icons/eye.svg' %}" alt="Eye"></button>
             </div>
         </div>
         <div class="mb-3">
@@ -70,7 +70,7 @@
         </div>
         <div class="d-flex align-items-center flex-column gap-3">
             <button type="submit" class="btn btn_verde color_preto w-25">Cadastrar usuário <i class="bi bi-plus-circle-fill"></i></button>
-            <a href="{% url 'list_user' %}" class="btn btn_rosa color_preto">Cancelar cadastro <i class="bi bi-x-square"></i></a>
+            <a href="{% url 'list_user' %}" class="btn btn_rosa color_preto w-25">Cancelar cadastro <i class="bi bi-x-square"></i></a>
         </div>
     </form>
 </main>
@@ -80,4 +80,5 @@
 {% endblock %}
 {% block scripts %}
 <script src="{% static 'scripts/maskCPF.js' %}"></script>
+<script src="{% static 'scripts/see_password.js' %}"></script>
 {% endblock %}

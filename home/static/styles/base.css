@@ -37,8 +37,12 @@ main {
     color: var(--Preto);
 }
 
+.color_rosa {
+    color: var(--Rosa);
+}
+
 .space_header {
-    margin-left: 65rem;
+    margin-left: 50rem;
 }
 
 .line_admin {
@@ -48,7 +52,7 @@ main {
 .btn_verde {
     background-color: var(--verde);
     padding: 4px 8px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .btn_verde:hover {
@@ -60,7 +64,7 @@ main {
 .btn_rosa {
     border: 2px solid var(--Rosa);
     padding: 4px 8px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .btn_rosa:hover {
@@ -72,13 +76,25 @@ main {
 .btn_amarelo {
     border: 2px solid var(--amarelo);
     padding: 4px 8px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .btn_amarelo:hover {
     background-color: transparent;
     border: 2px solid var(--amarelo);
     box-shadow: 0 4px 4px 0 var(--amarelo);
+}
+
+.btn_azul {
+    border: 2px solid var(--azul);
+    padding: 4px 8px;
+    border-radius: 5px;
+}
+
+.btn_azul:hover {
+    background-color: transparent;
+    border: 2px solid var(--azul);
+    box-shadow: 0 4px 4px 0 var(--azul);
 }
 
 .camp_senha {
@@ -88,4 +104,9 @@ main {
 .btn_eye {
     position: absolute;
     left: 78%;
+}
+
+.header_card {
+    background-color: var(--Preto);
+    padding: 10px 5px;
 }
