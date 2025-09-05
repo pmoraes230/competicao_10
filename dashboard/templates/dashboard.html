@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'styles/deteils_event.css' %}">
+{% endblock %}
+
+{% block content %}
+{% block header %}
+{% if user_role == "Validador" %}
+{% include "partials/header/header_validador.html" %}
+{% elif user_role == "Vendedor" %}
+{% include "partials/header/header_vendedor.html" %}
+{% else %}
+{% include "partials/header/header.html" %}
+{% endif %}
+{% endblock %}
+
+<main class="container">
+    {% if messages %}
+    <div class="modal fade" id="messageModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="messageModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 color_azul" id="messageModalLabel">Aviso</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        {% for message in messages %}
+                        <li class="list-group-item {{ message.tags }}">{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn_amarelo color_preto" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <h1 class="h1 color_azul text-center">Dashboard</h1>
+    <form action="{% url 'dashboard' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_event" class="form-label color_azul">Escolha o evento</label>
+            <select name="id_event" id="id_event" class="form-select color_azul">
+                <option value="" disabled selected>Escolha o evento</option>
+                {% for event in events %}
+                <option value="{{ event.id_evento }}">{{ event.nome_evento }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn_verde color_preto">Pesquisar <i class="bi bi-graph-up"></i></button>
+        </div>
+    </form>
+
+    {% if event %}
+    <div class="d-flex gap-3 mb-3">
+        <div class="img_evento">
+            {% if event.imagem_evento %}
+            <img src="{{ event.imagem_evento.url }}" alt="" style="width: 100%;">
+            {% else %}
+            <img src="{% static 'img/default.webp' %}" alt="img default" style="width: 100%;">
+            {% endif %}
+        </div>
+        <div class="inf_evento">
+            <h1 class="h1 color_azul">{{ event.nome_evento }}</h1>
+            <div class="d-flex gap-3">
+                <span class="bg_amarelo color_azul">{{ event.data_evento|date:"d/m/Y" }}</span>
+                <span class="bg_amarelo color_azul">{{ event.horario_evento|time:"H:i" }}</span>
+            </div>
+            <div class="descricao">
+                <p class="color_azul">{{ event.descricao_evento }}</p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if grafic_setors %}
+    <h1 class="h1 text-center color_azul">Informações vendas</h1>
+        <div class="row">
+            {% for item in grafic_setors %}
+            {% if item.alerta %}
+            <div class="alert alert-rosa">
+                {{ item.alerta }}
+            </div>
+            {% endif %}
+            <div class="col-md-6 mb-3">
+                <img src="data:image/png;base64, {{ item.grafic }}" alt="{{ item.setor }}">
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</main>
+
+{% endblock %}
+{% block footer %}
+{% if user_role == "Validador" %}
+{% include "partials/footer/footer_validador.html" %}
+{% elif user_role == "Vendedor" %}
+{% include "partials/footer/footer_Vendedor.html" %}
+{% else %}
+{% include "partials/footer/footer.html" %}
+{% endif %}
+{% endblock %}

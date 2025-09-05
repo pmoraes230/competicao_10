@@ -233,7 +233,12 @@ def deteils_event(request, id_event):
     return render(request, "events/deteils_event.html", context)
 
 def buy_ticket(request, id_event):
-    event = models.Evento.objects.get(id_evento=id_event)
+    try:
+        event = models.Evento.objects.get(id_evento=id_event)
+    except models.Evento.DoesNotExist:
+        messages.error(request, "Evento não encontrado")
+        return redirect("dashboard")
+    
     setores = models.Setor.objects.filter(evento_id_evento=event)
     search_client = None
     
@@ -246,25 +251,26 @@ def buy_ticket(request, id_event):
             return redirect("deteils_event", id_event=id_event)
         
         setor_id = request.POST.get("evento_id")
-        qtd_ingressos = int(request.POST.get("qtd_ingressos"), 0)
+        qtd_ingressos = int(request.POST.get("qtd_ingressos", 0))
         
         if not all([setor_id, qtd_ingressos]):
             messages.info(request, "Selecione o setor e a quantidade de ingressos")
+            return redirect("deteils_event", id_event=id_event)
         
         try:
             setor = models.Setor.objects.get(id_setor=setor_id)
-        except models.Evento.DoesNotExist:
-            messages.error(request, "Evento não encontrado")
+        except models.Setor.DoesNotExist:
+            messages.error(request, "Setor não encontrado")
             return redirect("deteils_event", id_event=id_event)
         
         if qtd_ingressos > setor.limite_setor:
-            messages.info(request, "A quantiade de ingresso excedeu o limite de ingressos disponíveis no setor")
+            messages.info(request, "A quantidade de ingressos excedeu o limite de ingressos disponíveis no setor")
         elif qtd_ingressos <= 0:
             messages.info(request, "Selecione um ingresso antes de comprar")
         else:
             tickets = []
             for _ in range(qtd_ingressos):
-                ticket =  models.Ingresso.objects.create(
+                ticket = models.Ingresso.objects.create(
                     cliente=client,
                     evento=event,
                     setor=setor,
@@ -279,13 +285,12 @@ def buy_ticket(request, id_event):
                 ticket.save()
             tickets.append(ticket)
                 
-            messages.success(request, "Ingresso emitido(s)")
+            messages.success(request, "Ingresso(s) emitido(s)")
             return redirect("deteils_event", id_event=id_event)
             
     context = {
         "event": event,
         "search_client": search_client,
-        "client": client,
         "setores": setores,
         **get_user_profile(request)
     }

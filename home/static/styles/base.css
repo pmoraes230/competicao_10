@@ -135,6 +135,13 @@ main {
     padding: 10px 5px;
 }
 
+.alert-rosa {
+    background-color: var(--Rosa);
+    color: var(--Preto);
+    text-align: center;
+    font-weight: bold;
+}
+
 @media (max-width: 440px) {
     .space_header {
         margin-left: 0;
@@ -142,5 +149,11 @@ main {
     
     .space_header_validador_vendedor {
         margin-left: 0;
+    }
+    .container_image {
+        display: none;
+    }
+    .inf_login {
+        margin: 6rem 0 0 3rem;
     }
 }
